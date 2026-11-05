@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Yoflix</title>
+  <defs>
+    <linearGradient id="mark" x1="4" y1="4" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2B78D0"/>
+      <stop offset="1" stop-color="#1452A0"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="19" fill="url(#mark)"/>
+  <path d="M14 16h11l7 12 7-12h11L37 36v12H27V36L14 16Z" fill="#fff"/>
+</svg>

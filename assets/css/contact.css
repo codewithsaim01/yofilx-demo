@@ -1,0 +1,59 @@
+/* Yoflix Nova — Contact page. Tokens come from theme.css. */
+
+/* Two cards: contact information (narrow) and the form (wide) */
+.nova-contact-section { padding-top: clamp(24px, 4vw, 48px); scroll-margin-top: calc(var(--nv-header-h) + 8px); }
+.nova-contact-split { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(20px, 3vw, 32px); align-items: start; }
+.nova-contact-card { padding: clamp(24px, 3vw, 36px); border: 1px solid var(--nv-line); border-radius: var(--nv-radius); background: #fff; box-shadow: 0 2px 4px rgba(11, 31, 77, .03), 0 24px 48px -28px rgba(21, 87, 255, .3); }
+.nova-contact-card h2 { margin: 0; font-size: clamp(24px, 2.4vw, 32px); line-height: 1.2; }
+.nova-contact-card-lead { margin: 10px 0 0; color: var(--nv-muted); font-size: 15px; line-height: 1.7; }
+
+.nova-contact-info { position: sticky; top: calc(var(--nv-header-h) + 24px); }
+.nova-contact-lines { margin: 22px 0 0; padding: 0; list-style: none; }
+.nova-contact-lines li { display: flex; align-items: flex-start; gap: 16px; padding: 20px 0; border-top: 1px solid var(--nv-line); }
+.nova-contact-lines li:last-child { padding-bottom: 0; }
+.nova-contact-line-icon { display: grid; flex-shrink: 0; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--nv-blue-soft); color: var(--nv-blue); font-size: 17px; }
+.nova-contact-line-copy { display: grid; gap: 3px; min-width: 0; padding-top: 2px; }
+.nova-contact-line-copy b { color: var(--nv-navy); font: 700 16px/1.3 var(--nv-display); }
+.nova-contact-line-copy a, .nova-contact-line-copy span { color: var(--nv-muted); font-size: 14px; overflow-wrap: anywhere; }
+.nova-contact-line-copy a { transition: color .2s; }
+.nova-contact-line-copy a:hover { color: var(--nv-blue); }
+
+.nova-contact-pill { margin-bottom: 14px; padding: 6px 14px; font-size: 12px; }
+.nova-contact-pill i { font-size: 11px; }
+.nova-contact-form .nova-contact-card-lead { margin-bottom: 26px; }
+.nova-contact-form .nova-form-grid { gap: 18px 16px; }
+.nova-contact-form .nova-field { gap: 7px; }
+.nova-contact-form .nova-field label { color: var(--nv-navy); font-size: 14px; font-weight: 600; }
+.nova-contact-form .nova-field input, .nova-contact-form .nova-field select, .nova-contact-form .nova-field textarea { min-height: 48px; padding: 11px 14px; border: 1px solid #dfe6f1; border-radius: 10px; background-color: #f8fbff; font-size: 15px; }
+.nova-contact-form .nova-field select { padding-right: 40px; }
+.nova-contact-form .nova-field textarea { min-height: 130px; }
+.nova-contact-form .nova-field input:hover, .nova-contact-form .nova-field select:hover, .nova-contact-form .nova-field textarea:hover { border-color: #c5d3ea; }
+.nova-contact-form .nova-field input:focus, .nova-contact-form .nova-field select:focus, .nova-contact-form .nova-field textarea:focus { border-color: var(--nv-blue); background-color: #fff; box-shadow: 0 0 0 3px rgba(21, 87, 255, .12); }
+.nova-contact-form .nova-field [aria-invalid="true"] { border-color: var(--nv-danger); background-color: #fffafa; }
+.nova-field input::placeholder, .nova-field textarea::placeholder { color: var(--nv-subtle); }
+
+.nova-contact-submit { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 24px; }
+.nova-contact-send { gap: 14px; padding-right: 8px; }
+.nova-contact-send-icon { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: #fff; color: var(--nv-blue); transition: transform .3s var(--nv-ease); }
+.nova-contact-send:hover .nova-contact-send-icon { transform: translateX(3px); }
+.nova-contact-send:hover .nova-contact-send-icon i { transform: none; }
+.nova-contact-privacy { margin: 0; color: var(--nv-muted); font-size: 13px; line-height: 1.6; }
+.nova-contact-privacy > i { margin-right: 6px; color: var(--nv-success); }
+.nova-contact-privacy a { color: var(--nv-blue); }
+
+/* Location */
+.nova-contact-location { padding-top: 0; }
+.nova-contact-location-head { display: grid; justify-items: center; max-width: 720px; margin: 0 auto clamp(28px, 4vw, 40px); text-align: center; }
+.nova-contact-location-head h2 { margin: 0; font-size: clamp(26px, 3vw, 40px); line-height: 1.2; }
+.nova-contact-location-head p:not(.nova-pill) { margin: 12px 0 0; color: var(--nv-muted); }
+.nova-contact-location-head a { color: var(--nv-blue); }
+.nova-contact-map { overflow: hidden; border: 1px solid var(--nv-line); border-radius: var(--nv-radius); box-shadow: var(--nv-shadow); }
+.nova-contact-map iframe { display: block; width: 100%; height: clamp(320px, 40vw, 460px); border: 0; }
+
+@media (max-width: 960px) {
+    .nova-contact-split { grid-template-columns: 1fr; }
+    .nova-contact-info { position: static; }
+}
+@media (max-width: 640px) {
+    .nova-contact-submit .nova-button { width: 100%; justify-content: space-between; }
+}
