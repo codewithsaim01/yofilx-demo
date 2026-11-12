@@ -1495,3 +1495,99 @@
 .nova-chat-messages::-webkit-scrollbar-thumb { border-radius: 6px; background: #c9d6ea; }
 
 
+
+/* ===== mobile.css — phone-first layer (kept last so it overrides the theme rules above) ===== */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+a, button, summary, label { -webkit-tap-highlight-color: transparent; }
+.nova-swipe-dots { display: none; }
+
+/* Touch screens: no hover lifts that get "stuck" after a tap */
+@media (hover: none) {
+    .nova-js .nova-market-card[data-reveal].is-visible:hover,
+    .nova-market-card:hover, .nova-plan-card:hover, .nova-value-card:hover,
+    .nova-js .nova-svc-card[data-reveal].is-visible:hover { transform: none; }
+    .nova-footer-nav a:hover { transform: none; }
+}
+
+@media (max-width: 680px) {
+    :root { --nv-section: 60px; }
+    .nova-section h2 { font-size: clamp(28px, 8vw, 34px); line-height: 1.12; }
+
+    /* iOS zooms into any field under 16px; keep every form field at 16px on phones */
+    input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]), select, textarea { font-size: 16px !important; }
+
+    /* Swipeable card rows: the next card peeks in so it is obvious the row scrolls */
+    .nova-market-cards, .nova-plan-grid, .nova-values-grid {
+        display: flex; gap: 14px; max-width: none; align-items: stretch;
+        margin-inline: calc(var(--nv-gutter) * -1); padding: 10px var(--nv-gutter) 26px;
+        overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+        scroll-padding-inline: var(--nv-gutter); scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    }
+    .nova-market-cards::-webkit-scrollbar, .nova-plan-grid::-webkit-scrollbar, .nova-values-grid::-webkit-scrollbar { display: none; }
+    .nova-market-cards > *, .nova-plan-grid > *, .nova-values-grid > * { flex: 0 0 86%; min-width: 0; margin-top: 0 !important; scroll-snap-align: start; }
+    .nova-plan-grid { padding-top: 14px; }
+    .nova-plan-card { display: flex; }
+    .nova-plan-card .nova-plan-body { flex: 1; }
+    /* Cards in a sideways row are already on screen; don't wait for a vertical scroll to fade them in */
+    .nova-js .nova-market-cards > [data-reveal], .nova-js .nova-values-grid > [data-reveal] { opacity: 1; transform: none; }
+
+    /* Each dot is a 24px-tall tap area with a small visible pill inside */
+    .nova-swipe-dots { display: flex; justify-content: center; margin: -14px 0 0; }
+    .nova-swipe-dots button { display: grid; place-items: center; height: 28px; padding: 0 4px; border: 0; background: none; cursor: pointer; }
+    .nova-swipe-dots button::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: #c9d6ea; transition: width .3s var(--nv-ease), background-color .3s; }
+    .nova-swipe-dots button.is-active::before { width: 24px; background: var(--nv-blue); }
+
+    /* Plan cards are narrower inside the swipe row: tighter padding, value rows on one line */
+    .nova-plan-body { padding: 24px 20px 24px; }
+    .nova-plan-fields { padding: 10px 14px; }
+    .nova-plan-fields > div { gap: 10px; }
+    .nova-plan-fields dd { white-space: nowrap; }
+
+    /* Home services: compact list rows, icon on the left (whole row stays tappable) */
+    .nova-so-cell { display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 14px; row-gap: 4px; align-content: start; padding: 18px 18px 18px 16px; }
+    .nova-so-cell > * { grid-column: 2; }
+    .nova-so-icon { grid-column: 1; grid-row: 1 / span 3; width: 44px; height: 44px; margin: 0; font-size: 17px; }
+    .nova-so-category { font-size: 11px; }
+    .nova-so-cell h3 { font-size: 17px; }
+    .nova-so-text { font-size: 14px; line-height: 1.5; }
+
+    /* Marketplace cards: the badge wraps under the logo instead of being cut off */
+    .nova-market-top { flex-wrap: wrap; row-gap: 10px; }
+    .nova-mk-badge { font-size: 12px; }
+
+    /* "Why YOFLIX" stats as a compact 2 x 2 grid */
+    .nova-why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .nova-why-metric, .nova-why-metric:nth-child(even), .nova-why-metric:nth-child(2) {
+        padding: 18px 16px; border: 1px solid var(--nv-line); border-radius: 18px; background: #fff;
+    }
+    .nova-why-metric:nth-child(-n+2) { border-top: 1px solid var(--nv-line); }
+    .nova-why-icon { width: 34px; height: 34px; margin-bottom: 12px; font-size: 14px; }
+    .nova-why-stat { font-size: 36px; }
+    .nova-why-metric h3 { font-size: 15px; }
+    .nova-why-text { font-size: 13.5px; line-height: 1.5; }
+
+    /* Footer: brand and contact full width, the two link lists side by side */
+    .nova-footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 16px; }
+    .nova-footer-grid > .nova-footer-brand, .nova-footer-grid > .nova-footer-contact { grid-column: 1 / -1; }
+    .nova-footer-nav ul { gap: 0; }
+    .nova-footer-nav a { align-items: baseline; gap: 8px; padding-block: 9px; font-size: 14.5px; line-height: 1.35; }
+    .nova-footer-nav a i { flex: none; font-size: 9px; }
+
+    /* About: founder portrait as a wide banner instead of a full-screen square */
+    .nova-founder-frame { aspect-ratio: 16 / 10; }
+    .nova-founder-monogram { font-size: 88px; }
+    .nova-footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; }
+
+    /* Comfortable tap targets for inline text links */
+    .nova-link-arrow, .nova-faqs-all, .nova-cta-email, .nova-svc-title-link, .nova-faq-copy { min-height: 44px; display: inline-flex; align-items: center; }
+    .nova-back-to-top { width: 44px; height: 44px; }
+
+    /* Chat button: clear of the iPhone home bar */
+    .nova-chat { right: 14px; bottom: max(14px, env(safe-area-inset-bottom)); }
+    .nova-chat-launcher { width: 52px; height: 52px; }
+}
+
+@media (max-width: 380px) {
+    .nova-market-cards > *, .nova-plan-grid > *, .nova-values-grid > * { flex-basis: 90%; }
+    .nova-why-stat { font-size: 32px; }
+}

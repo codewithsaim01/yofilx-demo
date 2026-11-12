@@ -65,6 +65,38 @@ document.addEventListener('DOMContentLoaded', () => {
         revealTargets.forEach((target) => observer.observe(target));
     }
 
+    /* ---------- Phone swipe rows: page dots under each row (hidden above 680px by CSS) ---------- */
+    document.querySelectorAll('.nova-market-cards, .nova-plan-grid, .nova-values-grid').forEach((track) => {
+        const items = [...track.children];
+        if (items.length < 2) return;
+        const dots = document.createElement('div');
+        dots.className = 'nova-swipe-dots';
+        const buttons = items.map((item, index) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.setAttribute('aria-label', `Show card ${index + 1} of ${items.length}`);
+            dot.addEventListener('click', () => {
+                track.scrollTo({ left: item.offsetLeft - items[0].offsetLeft, behavior: reduceMotion ? 'auto' : 'smooth' });
+            });
+            dots.append(dot);
+            return dot;
+        });
+        let frame = 0;
+        const update = () => {
+            frame = 0;
+            const step = items[1].offsetLeft - items[0].offsetLeft || 1;
+            const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+            const active = atEnd ? items.length - 1 : Math.round(track.scrollLeft / step);
+            buttons.forEach((dot, index) => {
+                dot.classList.toggle('is-active', index === active);
+                dot.setAttribute('aria-current', String(index === active));
+            });
+        };
+        track.addEventListener('scroll', () => { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
+        track.after(dots);
+        update();
+    });
+
     /* ---------- Pricing: Monthly / Yearly switch ---------- */
     document.querySelectorAll('[data-plan-billing]').forEach((section) => {
         const buttons = [...section.querySelectorAll('[data-plan-period]')];
